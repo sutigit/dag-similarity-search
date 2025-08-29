@@ -16,6 +16,11 @@ class DAG:
         else:
             raise ValueError("Both nodes must be added before creating an edge.")
 
+    def print_nodes(self):
+        print("Nodes in DAG:")
+        for node in self.nodes.values():
+            print(f"ID: {node.id}, Label: {node.label}")
+
     def visualize(self):
         G = nx.DiGraph()
         for node in self.nodes.values():

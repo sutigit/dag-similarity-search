@@ -2,11 +2,16 @@
   "nodes": [
     { "id": "A", "label": "A" },
     { "id": "B", "label": "B" },
-    { "id": "C", "label": "C" }
+    { "id": "C", "label": "C" },
+    { "id": "D", "label": "D" },
+    { "id": "E", "label": "E" },
+    { "id": "F", "label": "F" }
   ],
   "edges": [
     ["A", "B"],
-    ["A", "C"],
-    ["B", "C"]
+    ["B", "C"],
+    ["C", "D"],
+    ["D", "E"],
+    ["C", "F"]
   ]
 }
