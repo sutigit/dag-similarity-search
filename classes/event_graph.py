@@ -31,14 +31,25 @@ class EventGraph:
             # Node has id: int and event_type: str
             print(f"{nid!r}: {node.event_type}")
 
+# ...existing code...
     def visualize(self):
         G = nx.DiGraph()
         for node in self.nodes.values():
-            # Node has id and event_type; use event_type as the label
             label = node.event_type if getattr(node, "event_type", None) is not None else str(node.id)
+            # shorten long labels so they fit
+            if len(label) > 18:
+                label = label[:15] + "..."
             G.add_node(node.id, label=label)
         G.add_edges_from(self.edges)
         pos = nx.spring_layout(G)
         labels = {n: d.get('label', str(n)) for n, d in G.nodes(data=True)}
-        nx.draw(G, pos, with_labels=True, labels=labels, arrows=True, node_color='lightblue', node_size=1000)
+
+        # draw with smaller nodes and smaller label font
+        nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=400)
+        nx.draw_networkx_edges(G, pos, arrows=True)
+        nx.draw_networkx_labels(G, pos, labels=labels, font_size=8)  # reduce font_size as needed
+
+        plt.axis('off')
+        plt.tight_layout()
         plt.show()
+# ...existing code...
