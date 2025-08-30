@@ -13,6 +13,3 @@ class EventNodes:
             node = Node(et_id, et_name)
             self.nodes.append(node)
             
-            
-evn = EventNodes()
-print(evn.nodes)
