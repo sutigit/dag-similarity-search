@@ -1,6 +1,6 @@
 from typing import List
-from event_types import event_types
-from ..classes.node import Node
+from data.event_types import event_types
+from .node import Node
 
 class EventNodes:
     def __init__(self):
