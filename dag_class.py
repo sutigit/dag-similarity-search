@@ -1,6 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from node import Node
+from node_class import Node
 
 class DAG:
     def __init__(self):
