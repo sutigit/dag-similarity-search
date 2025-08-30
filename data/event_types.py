@@ -1,4 +1,4 @@
-event_type = {
+event_types = {
     0: 'started_school',
     1: 'finished_school',
     2: 'started_work',
