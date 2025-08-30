@@ -1,4 +1,4 @@
 class Node:
-    def __init__(self, id, event_type):
+    def __init__(self, id: int, event_type: str) -> None:
         self.id = id
         self.event_type = event_type
