@@ -1,2 +1,4 @@
 networkx
 matplotlib
+pinecone
+python-dotenv
