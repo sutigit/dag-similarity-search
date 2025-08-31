@@ -95,6 +95,8 @@ class EventGraph:
         nx.draw_networkx_edges(G, pos, arrows=True)
         nx.draw_networkx_labels(G, pos, labels=labels, font_size=8)
         plt.axis("off"); plt.tight_layout(); plt.show()
+    
+
 
     # ---- internal ----
     def _would_create_cycle(self, u: Hashable, v: Hashable) -> bool:
