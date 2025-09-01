@@ -21,11 +21,8 @@ def WL_neighborhood_label(graph: EventGraph, iterations: int = 3, inspect: bool 
 
             signature = (labels[node], tuple(neighbor_labels))
 
-            if inspect:
-                # keep inspection output readable and still a string so next iter is safe
-                new_label = signature
-            else:
-                new_label = stable_hash(repr(signature))
+            if inspect: print(repr(signature))
+            new_label = stable_hash(repr(signature))
             
             new_core[node] = new_label
             
@@ -40,6 +37,7 @@ def attributes_hash(graph: EventGraph, inspect: bool = False):
     for node in graph.nodes.values():
         for (attr_name, attr_value) in node.event_attributes.items():
             feat_key = (node.event_type, attr_name, attr_value)
+            if inspect: print(repr(feat_key))
             feat_hash = stable_hash(repr(feat_key))
             attr_features.append((feat_hash, attribute_weights[attr_name]))
     
@@ -53,10 +51,10 @@ def graph_to_fingerprint(graph: EventGraph, D=1024):
     fingerprint = [0.0] * D
     
     # structural contribution
-    for labels in labels_h_stack:          # use 0..h
+    for labels in labels_h_stack: 
         for feat in labels.values():
             idx = feat % D
-            fingerprint[idx] = 1.0       # or +=1 for counts
+            fingerprint[idx] = 1.0 
             
     # attribute contribution
     for (feat_hash, weight) in attr_features:
