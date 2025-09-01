@@ -1,5 +1,4 @@
 import hashlib
-from typing import Tuple, Hashable
 from data.attribute_weights import attribute_weights
 from classes.event_graph import EventGraph
 
