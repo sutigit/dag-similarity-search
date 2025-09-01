@@ -4,8 +4,9 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 class NodeLike(Protocol):
-    event_type: str  # non-optional
     id: Hashable
+    event_type: str
+    event_attributes: Dict[str, str]
 
 class EventGraph:
     def __init__(self) -> None:
