@@ -1,102 +1,325 @@
 event_types = {
-    0: 'started_school',
-    1: 'finished_school',
-    2: 'started_work',
-    3: 'new_family_member',
-    4: 'bought_house',
-    5: 'got_married',
-    6: 'got_divorced',
-    7: 'had_child',
-    8: 'moved_city',
-    9: 'moved_country',
-    10: 'graduated_highschool',
-    11: 'graduated_university',
-    12: 'started_university',
-    13: 'started_relationship',
-    14: 'ended_relationship',
-    15: 'death_in_family',
-    16: 'major_illness',
-    17: 'recovered_from_illness',
-    18: 'started_business',
-    19: 'business_closed',
-    20: 'promoted_at_work',
-    21: 'lost_job',
-    22: 'career_change',
-    23: 'retired',
-    24: 'won_award',
-    25: 'lost_lawsuit',
-    26: 'won_lawsuit',
-    27: 'went_bankrupt',
-    28: 'financial_windfall',
-    29: 'bought_car',
-    30: 'sold_car',
-    31: 'traveled_abroad',
-    32: 'returned_home',
-    33: 'military_service_started',
-    34: 'military_service_finished',
-    35: 'volunteering_started',
-    36: 'volunteering_ended',
-    37: 'published_book',
-    38: 'released_music',
-    39: 'started_hobby',
-    40: 'quit_hobby',
-    41: 'arrested',
-    42: 'released_from_prison',
-    43: 'got_pet',
-    44: 'lost_pet',
-    45: 'house_renovation',
-    46: 'started_religious_practice',
-    47: 'stopped_religious_practice',
-    48: 'baptism',
-    49: 'confirmation',
-    50: 'bar_mitzvah',
-    51: 'first_communion',
-    52: 'started_sport',
-    53: 'quit_sport',
-    54: 'won_competition',
-    55: 'lost_competition',
-    56: 'therapy_started',
-    57: 'therapy_ended',
-    58: 'diagnosed_condition',
-    59: 'surgery',
-    60: 'adopted_child',
-    61: 'fostered_child',
-    62: 'donated_organ',
-    63: 'received_organ_transplant',
-    64: 'first_kiss',
-    65: 'first_date',
-    66: 'got_engaged',
-    67: 'wedding_anniversary',
-    68: 'death_of_spouse',
-    69: 'death_of_parent',
-    70: 'death_of_child',
-    71: 'started_online_course',
-    72: 'finished_online_course',
-    73: 'graduated_phd',
-    74: 'graduated_masters',
-    75: 'bought_land',
-    76: 'sold_land',
-    77: 'moved_in_with_partner',
-    78: 'separated_from_partner',
-    79: 'opened_bank_account',
-    80: 'closed_bank_account',
-    81: 'first_salary',
-    82: 'inheritance_received',
-    83: 'accident',
-    84: 'recovered_from_accident',
-    85: 'natural_disaster_experience',
-    86: 'immigrated',
-    87: 'emigrated',
-    88: 'citizenship_granted',
-    89: 'citizenship_lost',
-    90: 'learned_new_language',
-    91: 'forgot_language',
-    92: 'first_vote',
-    93: 'elected_to_office',
-    94: 'left_office',
-    95: 'started_teaching',
-    96: 'stopped_teaching',
-    97: 'joined_club',
-    98: 'left_club',
-    99: 'started_research_project'
+    0: {
+        "event_type": "started_school",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "education_level": None,
+        },
+    },
+    1: {
+        "event_type": "finished_school",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "education_level": None,
+        },
+    },
+    2: {
+        "event_type": "started_work",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None,
+            "position": None,
+            "company": None
+        },
+    },
+    3: {
+        "event_type": "new_family_member",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    4: {
+        "event_type": "bought_house",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    5: {
+        "event_type": "got_married",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    6: {
+        "event_type": "got_divorced",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    7: {
+        "event_type": "had_child",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    8: {
+        "event_type": "moved_city",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "city": None
+        },
+    },
+    9: {
+        "event_type": "moved_country",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "country": None
+        },
+    },
+    10: {
+        "event_type": "graduated_highschool",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    11: {
+        "event_type": "graduated_university",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    12: {
+        "event_type": "started_university",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    13: {
+        "event_type": "started_relationship",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    14: {
+        "event_type": "death_in_family",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    15: {
+        "event_type": "major_illness",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    16: {
+        "event_type": "started_business",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None
+        },
+    },
+    17: {
+        "event_type": "business_closed",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None
+        },
+    },
+    18: {
+        "event_type": "promoted_at_work",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None,
+            "position": None,
+            "company": None
+        },
+    },
+    19: {
+        "event_type": "lost_job",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None,
+            "position": None,
+            "company": None
+        },
+    },
+    20: {
+        "event_type": "career_change",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "industry": None,
+            "position": None,
+            "company": None
+        },
+    },
+    21: {
+        "event_type": "retired",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    22: {
+        "event_type": "won_award",
+        "attributes": {
+            "age": None,
+            "time": None,  
+        },
+    },
+    23: {
+        "event_type": "bought_car",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    24: {
+        "event_type": "sold_car",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    25: {
+        "event_type": "traveled_abroad",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "country": None
+        },
+    },
+    26: {
+        "event_type": "military_service_started",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    27: {
+        "event_type": "military_service_finished",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    28: {
+        "event_type": "published_book",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    29: {
+        "event_type": "released_music",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    30: {
+        "event_type": "started_hobby",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "hobby": None
+        },
+    },
+    31: {
+        "event_type": "arrested",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    32: {
+        "event_type": "released_from_prison",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    33: {
+        "event_type": "got_pet",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    34: {
+        "event_type": "lost_pet",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    35: {
+        "event_type": "won_competition",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    36: {
+        "event_type": "therapy_started",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    37: {
+        "event_type": "therapy_ended",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    38: {
+        "event_type": "diagnosed_condition",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    39: {
+        "event_type": "surgery",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    40: {
+        "event_type": "got_engaged",
+        "attributes": {
+            "age": None,
+            "time": None,
+        },
+    },
+    41: {
+        "event_type": "graduated_phd",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "university": None
+        },
+    },
+    42: {
+        "event_type": "graduated_masters",
+        "attributes": {
+            "age": None,
+            "time": None,
+            "university": None
+        },
+    },
 }
