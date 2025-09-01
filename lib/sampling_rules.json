@@ -1,0 +1,122 @@
+{
+  "rules": [
+    {
+      "pattern": "^started_school$",
+      "age_min": 5,
+      "age_max": 8,
+      "base_rates": { "5-8": 0.9 },
+      "sets_state": ["education_started"]
+    },
+
+    {
+      "pattern": "^graduated_highschool$",
+      "prereqs": ["started_school"],
+      "age_min": 16,
+      "age_max": 21,
+      "base_rates": { "16-18": 0.25, "19-21": 0.5 },
+      "sets_state": ["secondary_done"]
+    },
+
+    {
+      "pattern": "^started_university$",
+      "requires_any": ["graduated_highschool", "finished_school"],
+      "age_min": 17,
+      "age_max": 25,
+      "base_rates": { "18-22": 0.6 },
+      "sets_state": ["tertiary_started"]
+    },
+
+    {
+      "pattern": "^graduated_(university|masters|phd)$",
+      "prereqs": ["started_university"],
+      "age_min": 20,
+      "age_max": 45,
+      "base_rates": { "22-30": 0.2, "31-45": 0.05 },
+      "cooldown_years": 2,
+      "max_count": 1
+    },
+
+    {
+      "pattern": "^started_work$",
+      "forbid_if_state": ["retired"],
+      "age_min": 15,
+      "age_max": 70,
+      "base_rates": { "17-25": 0.6, "26-40": 0.4, "41-70": 0.2 }
+    },
+
+    {
+      "pattern": "^retired$",
+      "age_min": 55,
+      "age_max": 80,
+      "base_rates": { "60-70": 0.25, "71-80": 0.4 },
+      "sets_state": ["retired"],
+      "max_count": 1
+    },
+
+    {
+      "pattern": "^got_married$",
+      "age_min": 18,
+      "age_max": 70,
+      "base_rates": { "22-35": 0.12, "36-50": 0.06, "51-70": 0.02 },
+      "forbid_if_occurred": ["got_divorced", "death_of_spouse"],
+      "max_count": 1,
+      "sets_state": ["in_union"]
+    },
+
+    {
+      "pattern": "^got_divorced$",
+      "prereqs": ["got_married"],
+      "age_min": 18,
+      "age_max": 80,
+      "base_rates": { "22-60": 0.02 },
+      "clears_state": ["in_union"]
+    },
+
+    {
+      "pattern": "^had_child$",
+      "requires_any": ["got_married", "moved_in_with_partner"],
+      "age_min": 18,
+      "age_max": 50,
+      "max_count": 4,
+      "cooldown_years": 1,
+      "base_rates": { "22-30": 0.18, "31-40": 0.12, "41-50": 0.02 }
+    },
+
+    {
+      "pattern": "^moved_city$",
+      "age_min": 16,
+      "age_max": 90,
+      "base_rates": { "18-35": 0.08, "36-55": 0.04, "56-90": 0.02 },
+      "cooldown_years": 1
+    },
+
+    {
+      "pattern": "^lost_job$",
+      "prereqs": ["started_work"],
+      "age_min": 18,
+      "age_max": 70,
+      "base_rates": { "18-29": 0.03, "30-49": 0.04, "50-70": 0.03 },
+      "sets_state": ["unemployed"]
+    },
+
+    {
+      "pattern": "^started_work$",
+      "requires_any": [
+        "graduated_highschool",
+        "graduated_university",
+        "lost_job"
+      ],
+      "forbid_if_state": ["retired"],
+      "clears_state": ["unemployed"],
+      "age_min": 15,
+      "age_max": 70,
+      "base_rates": { "18-60": 0.45 }
+    }
+  ],
+  "demographic_overrides": [
+    {
+      "when": { "country": "FI" },
+      "scale": { "^started_university$": 1.1, "^had_child$": 0.95 }
+    }
+  ]
+}
