@@ -64,5 +64,4 @@ def graph_to_fingerprint(graph: EventGraph, D=1024):
         idx = feat_hash % D
         fingerprint[idx] = weight
     
-    print(fingerprint)
     return fingerprint

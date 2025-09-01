@@ -7,6 +7,60 @@ from classes.event_node import EventNode
 from data.event_types import event_types  # {int: 'name'}
 from pathlib import Path
 
+# small vocabularies for attribute sampling
+_EDU_LEVELS = ["primary", "highschool", "bachelor", "master", "phd"]
+_INDUSTRIES = ["tech", "finance", "healthcare", "education", "manufacturing", "retail"]
+_POSITIONS = ["intern", "junior", "senior", "manager", "director", "executive"]
+_CITIES = ["Bangkok", "New York", "London", "Paris", "Tokyo", "Berlin"]
+_COUNTRIES = ["Thailand", "USA", "UK", "France", "Japan", "Germany"]
+_UNIS = ["Chulalongkorn", "Mahidol", "Harvard", "Oxford", "Tokyo Univ."]
+_HOBBIES = ["reading", "sports", "music", "painting", "photography", "gardening"]
+
+def _get_event_spec_by_name(name: str) -> Optional[Dict]:
+    for v in event_types.values():
+        if v.get("event_type") == name:
+            return v
+    return None
+
+def generate_event_attributes(name: str, age: Optional[int], rng: random.Random) -> Dict[str, object]:
+    """Create plausible random attribute values for the given event `name`.
+
+    - `age` is used when available for the `age` attribute.
+    - `time` is a sampled year between 1950 and 2024.
+    - categorical attributes are sampled from small vocabularies above.
+    """
+    spec = _get_event_spec_by_name(name)
+    out: Dict[str, object] = {}
+    if not spec:
+        return out
+
+    attrs = spec.get("attributes", {})
+    for k in attrs.keys():
+        if k == "age":
+            out["age"] = int(age) if age is not None else rng.randint(0, 90)
+        elif k == "time":
+            # produce a simple year integer; other modules may prefer strings
+            out["time"] = rng.randint(1950, 2024)
+        elif k == "education_level":
+            out["education_level"] = rng.choice(_EDU_LEVELS)
+        elif k == "industry":
+            out["industry"] = rng.choice(_INDUSTRIES)
+        elif k == "position":
+            out["position"] = rng.choice(_POSITIONS)
+        elif k == "company":
+            out["company"] = f"Company_{rng.randint(1,200)}"
+        elif k == "city":
+            out["city"] = rng.choice(_CITIES)
+        elif k == "country":
+            out["country"] = rng.choice(_COUNTRIES)
+        elif k == "university":
+            out["university"] = rng.choice(_UNIS)
+        elif k == "hobby":
+            out["hobby"] = rng.choice(_HOBBIES)
+        else:
+            out[k] = rng.choice([None, rng.randint(0, 100), f"val_{rng.randint(0,999)}"])
+    return out
+
 # ---------- Rule engine (regex-based, name-agnostic) ----------
 @dataclass
 class Rule:
@@ -66,8 +120,15 @@ def max_count_for(rules_for_e: List[Rule]) -> Optional[int]:
     return min(caps) if caps else None
 
 # ---------- Sampler (name-agnostic) ----------
-def add_event(graph, name, last):
-    node = EventNode(name)
+def add_event(graph, name, last, *, age: Optional[int] = None, rng: Optional[random.Random] = None):
+    """Add an EventNode to `graph`. If `rng` is provided, synthesize attributes using `generate_event_attributes`.
+
+    `age` is used to populate the event's age attribute when applicable.
+    """
+    attrs = {}
+    if rng is not None:
+        attrs = generate_event_attributes(name, age, rng)
+    node = EventNode(name, event_attributes=attrs)
     graph.add_node(node)
     if last is not None:
         graph.add_edge(last, node)
@@ -126,7 +187,8 @@ def sample_graph(rng: random.Random, max_events: int, rules: List[Rule],
 
         # append fired events in deterministic order (by name) to make runs reproducible
         for name in sorted(fired):
-            last = add_event(g, name, last)
+            # pass current age and RNG so attributes get sampled per event
+            last = add_event(g, name, last, age=age, rng=rng)
             occurred.add(name)
             seen_counts[name] = seen_counts.get(name,0) + 1
 
